@@ -9,7 +9,6 @@
     </head>
     <body>  
         <?php include 'header.php';?>
-        hoi
         <div class="column">
             <div class="centerImage">
                 <i class="fas fa-check-circle fa-mycustomx"></i> 
