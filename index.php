@@ -2,22 +2,31 @@
 		
 <div class="column">
 	<div class="centerImage">
-		<i class="fas fa-check-circle fa-mycustomx"></i> 
+		<i class="fas fa-check-circle kwaliteit"></i> 
 	</div>
-	<p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. </p>
+	<div class="center">
+		<h1>Kwaliteit</h1>
+	</div>
+	<p>Wij vinden het belangrijk dat ons product van een goede kwaliteit is. Hieronder zien wij gebruiksvriendelijkheid, duurzaam materiaal en een goede prijs-kwaliteitverhouding. We zijn continu bezig met het verder ontwikkelen van de SmartCap. Daarom is de mening van u, de klant, erg belangrijk. Heb je een wens of idee voor de SmartCap, neem gerust contact op via de <a href="contact.php">contactpagina</a>! Wil je SmartCaps delen met vrienden via social media? Klik op de icoontjes onderaan de pagina.</p>
 </div>
 <div class="column">
 	<div class="centerImage">
-		<i class="fab fa-pagelines fa-mycustomx"></i> 
+		<i class="fab fa-pagelines milieu"></i> 
 	</div>
-	<p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. </p>
+	<div class="center">
+		<h1>Milieubewust</h1>
+	</div>
+	<p>Duurzaamheid speelt een grote rol binnen ons bedrijf. Drinkdopjes worden vaak gemaakt van plastic. Hier hebben wij een andere oplossing voor gevonden, namelijk: 3D printen! Door 3D printers is er minder behoefte aan transport van goederen. Er hoeven immers geen fysieke goederen over een grote afstand vervoerd te worden, maar alleen bouwtekeningen via het internet verstuurd te worden. Het uiteindelijke fysieke product wordt vervolgens lokaal door de 3D printer uitgeprint.</p>
 </div>
 <div class="column">
 	<div class="centerImage">
-		<i class="fas fa-truck fa-mycustomx"></i>
+		<i class="fas fa-mobile-alt mobiel"></i>
 	</div>
-	<p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. </p>
+	<div class="center">
+		<h1>Applicatie</h1>
+	</div>
+	<p> Via de applicatie op je mobiele telefoon kun je de opgeslagen gegevens van je SmartCap bijhouden. Deze gegevens kun je delen via social media, of vergelijken met je vrienden binnen de applicatie. De SmartCap applicatie is 100% gratis te downloaden in zowel de Appstore als de Google Playstore.
+</p>
 </div>
-<br class="floatclear">
 
 <?php include("footer.php"); ?>
