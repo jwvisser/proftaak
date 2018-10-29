@@ -1,11 +1,11 @@
 html {
-	height: 100%;
+    height: 100%;
 }
 
 body {
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
     margin: 0px;
     font-family: 'Lato', sans-serif;
 }
@@ -57,8 +57,8 @@ body {
     width: 100%;
     height: 250px;
     background-image: url("images/header.jpg");
-	background-repeat: no-repeat;
-	background-size: cover;
+    background-repeat: no-repeat;
+    background-size: cover;
     overflow: hidden;
     border-bottom: 15px solid #611D6A;
 }
@@ -76,13 +76,13 @@ body {
 .headerbar h1 {
     font-size: 4em;
     margin-bottom: 0px;
-	color: #FFB200;
+    color: #FFB200;
 }
 
 .headerbar h2 {
     font-size: 2em;
     margin-top: 0px;
-	color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 /*
@@ -109,7 +109,6 @@ body {
     color: #CD7097;
     font-size: 1em;
     font-weight: 100;
-    text-transform: lowercase;
 }
 
 .content a {
@@ -122,17 +121,20 @@ body {
     color: #FFB200;
 }
 
+.italicised {
+    font-style: italic;
+}
 /*
     Footer
 */
 
 .footerpusher {
-	flex: 1 0 auto;
+    flex: 1 0 auto;
     margin-bottom: 50px;
 }
 
 .footerbackground {
-	flex-shrink: 0;
+    flex-shrink: 0;
     background-color: #611D6A;
     width: 100%;
 }
@@ -161,6 +163,12 @@ body {
     width: 30%;
     float: left;
     margin-right: 3%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .kwaliteit {
@@ -194,7 +202,7 @@ body {
 }
 
 .centerImage {
-	text-align: center;
+    text-align: center;
 }
 
 .center {
@@ -230,10 +238,10 @@ body {
 }
 
 .form img {
-	width: 100%;
-	max-width: 300px;
+    width: 100%;
+    max-width: 300px;
     height: auto;
-	margin-top: 25px;
+    margin-top: 25px;
 }
 
 input[type=text], textarea {
