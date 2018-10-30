@@ -51,6 +51,7 @@
 <?php } ?>
 
 <div class="info">
+    <p>
 	<strong>SmartCaps</strong><br>
 	Hogeschoollaan 1<br>
 	4818 CR Breda<br><br>
@@ -60,6 +61,7 @@
 	KVK: 41104408<br><br>
 	IBAN: NL31RABO0188917764<br>
 	BIC: RABONL2U
+    </p>
 </div>
 
 <div id="map">

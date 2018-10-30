@@ -30,9 +30,11 @@
     <div class="center">
         Onze visie
     </div>
-    <div class="italicised">"
-        Met de SmartCap is het bijhouden van wat je drinkt een koud kunstje. Wij zorgen ervoor dat jij 
+    <div class="italicised">
+        <p>
+        "Met de SmartCap is het bijhouden van wat je drinkt een koud kunstje. Wij zorgen ervoor dat jij 
         vanaf nu altijd weet wat, hoeveel en wanneer je drinkt. Blijf voor altijd vitaal door het gebruik van de SmartCap en de app."
-    </div> </p>
+        </p>
+    </div>
 </div>
 <?php include("footer.php"); ?>
