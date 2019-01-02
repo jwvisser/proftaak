@@ -1,38 +1,83 @@
 <?php include("header.php"); ?>
 
-<h1>Leer smartcaps kennen</h1>
-<h2>oprichters, achtergrond en geschiedenis</h2>
+<?php if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	
+	$voornaam = $_POST["voornaam"];
+	$achternaam = $_POST["achternaam"];
+	$email = $_POST["email"];
+	$onderwerp = $_POST["onderwerp"];
+	$bericht = $_POST["bericht"];
+	
+	mail("mail@bitcrazy.nl", $onderwerp, $bericht, "Reply-To: " . $email);
+	mail($email, $onderwerp, $bericht, "From: SmartCaps <noreply@bitcrazy.nl>");
+	?>
+	
+	<h1>Bedankt voor je bericht</h1>
+	<h2>wij gaan aan de slag</h2>
 
-<div class="row">
-    <div class="column">
-        <div class="centerImage">
-            <img src="images/fotoRV.jpg" alt="Ren&eacute van Vliet" class="aboutPic">
-        </div>
-        <p>Ik ben Rene van Vliet. Ik woon in Breda en ben 35 jaar oud. Ik werk op de financiële afdeling van een verzekeringsmaatschappij. Daar houd ik mij vooral bezig met databeheer en programmeren. Hier werk ik nu 4 jaar. Om mijn kennis te verbeteren volg ik nu de opleiding Informatica. Samen met Stefan en Jan-Willem zijn we SmartCaps begonnen. Binnen SmartCaps houd ik mij bezig met het databeheer.</p>
-    </div>
-    <div class="column">
-        <div class="centerImage">
-            <img src="images/fotoSV.jpg" alt="Stefan Verloo" class="aboutPic">
-        </div>
-        <p>Mijn naam is Stefan Verloo. Ik ben 29 jaar oud, geboren en getogen in Zierikzee. Op het moment werk ik voor een IT bedrijf dat ERP- en mobiele software produceert voor andere bedrijven. Dit werk ben ik tegelijk begonnen met mijn opleiding Informatica. Samen met twee studiegenoten (Ren&eacute; en Jan-Willem) ben ik SmartCaps begonnen. Ik houd mij voornamelijk bezig met de administratie binnen SmartCaps.</p>
-    </div>
-    <div class="column">
-        <div class="centerImage">
-            <img src="images/fotoJW.jpg" alt="Jan-Willem Visser" class="aboutPic">
-        </div>
-        <p>Ik ben Jan-Willem Visser. Ik ben 21 jaar oud en kom uit Sleeuwijk. Naast mijn werkzaamheden bij SmartCaps werk ik nog bij een ICT bedrijf dat software ontwikkelt voor kinderdagverblijven. Hiervoor volg ik nu een opleiding Informatica, om mijn kennis uit te breiden op dit gebied. Mijn doel binnen SmartCaps is om de klant tevreden te stellen. Als je contact met ons opneemt, zal je vaak een reactie krijgen van mij.</p>
-    </div>
+	<div class="form">
+		<p>Bedankt voor je bericht, <?php echo $voornaam; ?>!</p>
+		<p>Uw bericht is doorgestuurd naar SmartCaps. Bovendien heeft u de inhoud van uw bericht ook in uw eigen mailbox ontvangen. Wij gaan ermee aan de slag en komen zo snel mogelijk met een reactie. Je kunt dus even achteroverleunen.</p>
+		<p>Met vriendelijke groet,</p>
+		<img src="images/logoSmartCaps.png" alt="SmartCaps">
+	</div>
+	
+<?php } else { ?>
+
+<h1>Contact opnemen met SmartCaps</h1>
+<h2>contactgegevens, locatie en contactformulier</h2>
+
+<div class="form">
+	<form method="post" action="contact.php">
+		<label>Voornaam</label>
+		<input type="text" name="voornaam" placeholder="Uw voornaam" value="<?php echo $voornaam; ?>" />
+
+		<label>Achternaam</label>
+		<input type="text" name="achternaam" placeholder="Uw achternaam" value="<?php echo $achternaam; ?>" />
+
+		<label>E-mail adres</label>
+		<input type="text" name="email" placeholder="Uw e-mail adres" value="<?php echo $email; ?>" />
+
+		<label>Onderwerp</label>
+		<input type="text" name="onderwerp" placeholder="Onderwerp van uw bericht" value="<?php echo $onderwerp; ?>" />
+
+		<label>Bericht</label>
+		<textarea name="bericht" placeholder="Schrijf uw bericht hier"><?php echo $bericht; ?></textarea>
+
+		<input type="submit" value="verzend" />
+	</form>
 </div>
-<hr>
-<div class="row">
-    <h2>Het bedrijf SmartCaps</h2>
-    <p>SmartCaps is een bedrijf dat is opgericht in 2018. Het begon allemaal met de gedachtegang dat het bijhouden van de hoeveelheid die je drinkt makkelijker moest zijn dan nu. Er waren wel applicaties waar je het zelf in kon vullen, maar nog geen tools die dit automatisch voor je deden. De SmartCap werd geboren en zo ook het bedrijf SmartCaps. Ondertussen zijn we een beginnend bedrijf met een volwaardig product. <br><br>
-    <div class="center">
-        Onze visie
-    </div>
-    <div class="italicised">"
-        Met de SmartCap is het bijhouden van wat je drinkt een koud kunstje. Wij zorgen ervoor dat jij 
-        vanaf nu altijd weet wat, hoeveel en wanneer je drinkt. Blijf voor altijd vitaal door het gebruik van de SmartCap en de app."
-    </div> </p>
+
+<?php } ?>
+
+<div class="info">
+	<strong>SmartCaps</strong><br>
+	Hogeschoollaan 1<br>
+	4818 CR Breda<br><br>
+	Mail: <a href="mailto:mail@bitcrazy.nl">mail@bitcrazy.nl</a><br><br>
+	Tel: 088 525 7500<br><br>
+	BTW: NL808852218B01<br>
+	KVK: 41104408<br><br>
+	IBAN: NL31RABO0188917764<br>
+	BIC: RABONL2U
 </div>
+
+<div id="map">
+
+</div>
+
+<script>
+	function initMap() {
+
+		var smartcaps = {lat: 51.5840116, lng: 4.7972549};
+		
+		var map = new google.maps.Map(
+			document.getElementById('map'), {zoom: 8, center: smartcaps});
+		
+		var marker = new google.maps.Marker({position: smartcaps, map: map});
+	}
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAW1JYS_s-x7et0OKs8Z-jYaLSMYivz-Ow&callback=initMap"></script>
+
 <?php include("footer.php"); ?>
