@@ -15,6 +15,7 @@
 					<a href="index.php">Home</a>
 					<a href="aboutus.php">Over Ons</a>
 					<a href="contact.php">Contact</a>
+                                        <a href="products.php">Voedingswaarde producten</a>
 				</div>
 			</div>
 			<div class="headerbackground">
