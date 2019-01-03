@@ -1,3 +1,7 @@
+<?php
+include('../private/_config.php');
+include('../private/database.php');
+?>
 <!DOCTYPE html>
 <html lang="nl">
     <head>
@@ -8,21 +12,20 @@
         <link href="https://fonts.googleapis.com/css?family=Lato|Lora|Source+Sans+Pro" rel="stylesheet"> 
     </head>
     <body>
-		<div class="footerpusher">
-			<div class="topnavbackground">
-				<div class="topnavbar">
-					<span>SMARTCAPS</span>
-					<a href="index.php">Home</a>
-					<a href="aboutus.php">Over Ons</a>
-					<a href="contact.php">Contact</a>
+        <div class="footerpusher">
+            <div class="topnavbackground">
+                <div class="topnavbar">
+                    <span>SMARTCAPS</span>
+                    <a href="index.php">Home</a>
+                    <a href="aboutus.php">Over Ons</a>
+                    <a href="contact.php">Contact</a>
                     <a href="products.php">Voedingswaarden</a>
-				</div>
-			</div>
-			<div class="headerbackground">
-				<div class="headerbar">
-					<h1>SMARTCAPS</h1>
-					<h2>keep track.</h2>
-				</div>
-			</div>
-			<div class="content">
-               
+                </div>
+            </div>
+            <div class="headerbackground">
+                <div class="headerbar">
+                    <h1>SMARTCAPS</h1>
+                    <h2>keep track.</h2>
+                </div>
+            </div>
+            <div class="content">
