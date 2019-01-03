@@ -1,4 +1,10 @@
 <?php
+if (!file_exists('../private/_config.php')) {
+    echo 'You need to setup a _config.php in the private dir, see config.example.php';
+    exit;
+}
+
+
 include('../private/_config.php');
 include('../private/database.php');
 ?>
