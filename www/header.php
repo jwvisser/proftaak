@@ -10,6 +10,7 @@ include('../private/database.php');
         <link type="text/css" rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Lato|Lora|Source+Sans+Pro" rel="stylesheet"> 
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     </head>
     <body>
         <div class="footerpusher">
