@@ -9,6 +9,9 @@ $smt->execute();
 $drinks = $smt->fetchAll(\PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
 ?>
 
+<h1>Voedingswaarden producten</h1>
+<h2>Wat zit daar eigenlijk in?</h2>
+
 <form method="GET">
     <select class="select-search" name="drink" required>
         <option value="">Zoek een drankje</option>
@@ -17,6 +20,9 @@ $drinks = $smt->fetchAll(\PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
         <?php endforeach; ?>
     </select>
     <button class="btn btn-xs btn-primary" type="submit">Selecteer drankje</button>
+    <a title="De voedingswaarde zijn per 100 gram drinken.">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
 </form>
 <?php
 if (!empty($id) && isset($drinks[$id])) {

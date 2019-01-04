@@ -4,7 +4,6 @@ if (!file_exists('../private/_config.php')) {
     exit;
 }
 
-
 include('../private/_config.php');
 include('../private/database.php');
 ?>
