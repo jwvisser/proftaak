@@ -20,9 +20,9 @@ $drinks = $smt->fetchAll(\PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
         <?php endforeach; ?>
     </select>
     <button class="btn btn-xs btn-primary" type="submit">Selecteer drankje</button>
-    <a title="De voedingswaarde zijn per 100 gram drinken.">
-                            <i class="fas fa-info-circle"></i>
-                        </a>
+    <a title="De voedingswaarde zijn per 100 gram.">
+        <i class="fas fa-info-circle"></i>
+    </a>
 </form>
 <?php
 if (!empty($id) && isset($drinks[$id])) {
@@ -34,7 +34,7 @@ if (!empty($id) && isset($drinks[$id])) {
         </thead>
         <tbody>
             <?php
-                echo "<tr><td>" . $row["drink"] . "</td><td>" . $row["calories"] . "</td><td>" . $row["amount of water"] . "</td><td>" . $row["protein"] . "</td><td>" . $row["saturated fats"] . "</td><td>" . $row["unsaturated fats"] . "</td><td>" . $row["cholesterol"] . "</td><td>" . $row["carbohydrates"] . "</td><td>" . $row["sugar"] . "</td><td>" . $row["vitamines"] . "</td></tr>";
+            echo "<tr><td>" . $row["drink"] . "</td><td>" . $row["calories"] . "</td><td>" . $row["amount of water"] . "</td><td>" . $row["protein"] . "</td><td>" . $row["saturated fats"] . "</td><td>" . $row["unsaturated fats"] . "</td><td>" . $row["cholesterol"] . "</td><td>" . $row["carbohydrates"] . "</td><td>" . $row["sugar"] . "</td><td>" . $row["vitamines"] . "</td></tr>";
             ?>
         </tbody>
     </table>
