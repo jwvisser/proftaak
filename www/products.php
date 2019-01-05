@@ -12,6 +12,7 @@ $drinks = $smt->fetchAll(\PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
 <h1>Voedingswaarden producten</h1>
 <h2>Wat zit daar eigenlijk in?</h2>
 
+<p>
 <form method="GET">
     <select class="select-search" name="drink" required>
         <option value="">Zoek een drankje</option>
@@ -19,15 +20,17 @@ $drinks = $smt->fetchAll(\PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
             <option value="<?php echo $drink['idIngredient']; ?>"><?php echo $drink['drink']; ?></option>
         <?php endforeach; ?>
     </select>
-    <button class="btn btn-xs btn-primary" type="submit">Selecteer drankje</button>
+    <button type="submit">Selecteer drankje</button>
     <a title="De voedingswaarde zijn per 100 gram.">
         <i class="fas fa-info-circle"></i>
     </a>
 </form>
+</p>
 <?php
 if (!empty($id) && isset($drinks[$id])) {
     $row = $drinks[$id];
     ?>
+    <p>
     <table class="table">
         <thead>
             <tr><th>Product</th><th>Kcal</th><th>Water</th><th>Eiwit</th><th>V-vetten</th><th>OV-vetten</th><th>Cholesterol</th><th>Koolhydraten</th><th>Suiker</th><th>Vitamines</th></tr>
@@ -38,9 +41,8 @@ if (!empty($id) && isset($drinks[$id])) {
             ?>
         </tbody>
     </table>
+    </p>
     <?php
-} else {
-    echo 'Niet gevonden';
 }
 
 include("footer.php");
