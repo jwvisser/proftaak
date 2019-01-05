@@ -3,7 +3,7 @@ include("header.php");
 
 $id = (isset($_GET['drink'])) ? (int) $_GET['drink'] : false;
 
-$sql = "SELECT idIngredient as uniqueId,ingredients.* FROM ingredients ORDER BY drink";
+$sql = "SELECT idIngredient as uniqueId,ingredients.* FROM ingredients ORDER BY name";
 $smt = $conn->prepare($sql);
 $smt->execute();
 $drinks = $smt->fetchAll(\PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
@@ -17,7 +17,7 @@ $drinks = $smt->fetchAll(\PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
     <select class="select-search" name="drink" required>
         <option value="">Zoek een drankje</option>
         <?php foreach ($drinks as $drink) : ?>
-            <option value="<?php echo $drink['idIngredient']; ?>"><?php echo $drink['drink']; ?></option>
+            <option value="<?php echo $drink['idIngredient']; ?>"><?php echo $drink['name']; ?></option>
         <?php endforeach; ?>
     </select>
     <button type="submit">Selecteer drankje</button>
@@ -37,7 +37,7 @@ if (!empty($id) && isset($drinks[$id])) {
         </thead>
         <tbody>
             <?php
-            echo "<tr><td>" . $row["drink"] . "</td><td>" . $row["calories"] . "</td><td>" . $row["amount of water"] . "</td><td>" . $row["protein"] . "</td><td>" . $row["saturated fats"] . "</td><td>" . $row["unsaturated fats"] . "</td><td>" . $row["cholesterol"] . "</td><td>" . $row["carbohydrates"] . "</td><td>" . $row["sugar"] . "</td><td>" . $row["vitamines"] . "</td></tr>";
+            echo "<tr><td>" . $row["name"] . "</td><td>" . $row["calories"] . "</td><td>" . $row["amount of water"] . "</td><td>" . $row["protein"] . "</td><td>" . $row["saturated fats"] . "</td><td>" . $row["unsaturated fats"] . "</td><td>" . $row["cholesterol"] . "</td><td>" . $row["carbohydrates"] . "</td><td>" . $row["sugar"] . "</td><td>" . $row["vitamines"] . "</td></tr>";
             ?>
         </tbody>
     </table>
