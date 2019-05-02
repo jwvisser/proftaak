@@ -1,12 +1,11 @@
 <?php
-include("header.php");
+include("components/header.php");
 
-$id = (isset($_GET['drink'])) ? (int) $_GET['drink'] : false;
+require_once('components/database/class.db.php');
 
-$sql = "SELECT idIngredient as uniqueId,ingredients.* FROM ingredients ORDER BY name";
-$smt = $conn->prepare($sql);
-$smt->execute();
-$drinks = $smt->fetchAll(\PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
+$db = new db;
+$db->returnTable("customer","");
+
 ?>
 
 <h1>Voedingswaarden producten</h1>
@@ -45,4 +44,4 @@ if (!empty($id) && isset($drinks[$id])) {
     <?php
 }
 
-include("footer.php");
+include("components/footer.php");

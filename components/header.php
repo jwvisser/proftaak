@@ -1,18 +1,13 @@
 <?php
-if (!file_exists('../private/_config.php')) {
-    echo 'You need to setup a _config.php in the private dir, see config.example.php';
-    exit;
-}
-
-include('../private/_config.php');
-include('../private/database.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 ?>
 <!DOCTYPE html>
 <html lang="nl">
     <head>
         <title>SmartCaps</title>
         <meta charset="UTF-8">
-        <link type="text/css" rel="stylesheet" href="style.css">
+        <link type="text/css" rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Lato|Lora|Source+Sans+Pro" rel="stylesheet"> 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
@@ -23,7 +18,7 @@ include('../private/database.php');
                 <div class="topnavbar">
                     <span>SMARTCAPS</span>
                     <a href="index.php">Home</a>
-                    <a href="aboutus.php">Over Ons</a>
+                    <a href="about-us.php">Over Ons</a>
                     <a href="contact.php">Contact</a>
                     <a href="products.php">Voedingswaarden</a>
                 </div>

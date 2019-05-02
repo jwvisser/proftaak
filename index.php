@@ -1,4 +1,4 @@
-<?php include("header.php"); ?>
+<?php include("components/header.php"); ?>
 <div class="row">		
     <div class="column">
         <div class="centerImage">
@@ -32,7 +32,7 @@
 <hr>
 <div class="row">		
     <div class="centerImage">
-        <img src="images/logoSmartCaps.png" alt="SmartCaps"> 
+        <img src="assets/logoSmartCaps.png" alt="SmartCaps"> 
     </div>
     <div class="center">
         <h1>De SmartCap</h1>
@@ -41,4 +41,4 @@
     <p>De SmartCap is makkelijk te gebruiken, je draait hem op je flesje en klaar! Je kunt kiezen uit verschillende kleuren voor de Smartcap.
 De batterijduur is maar net afhankelijk van het gebruik. De SmartCap gaat minimaal 24 uur mee, waardoor je hem gemakkelijk 's nachts op kunt laden zodat je hem de volgende dag weer kunt gebruiken. De batterij is makkelijk op te laden met je telefoonoplader door de universele USB-poort.</p>
 </div>
-<?php include("footer.php"); ?>
+<?php include("components/footer.php"); ?>
