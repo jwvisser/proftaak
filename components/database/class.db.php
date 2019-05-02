@@ -4,12 +4,14 @@ class db {
 
     private $db;
     private $conn;
+    private $database;
 
     public function __construct() {
         include('dbCredentials.php');
-        
+        $this->database = $database;
+
         // Create connection
-        $this->conn = new mysqli($servername, $username, $password,$db);
+        $this->conn = new mysqli($servername, $username, $password,$database);
         
         // Check connection
         if ($this->conn->connect_error) {
@@ -24,7 +26,9 @@ class db {
         // Check if custom field selection is empty or not.
         if($fields == ""){
             // Run query to get field names from table. 
-            $query = mysqli_query($this->conn,"SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='smartcaps' AND `TABLE_NAME`='$table';");
+            $selectedDB = $this->database;
+
+            $query = mysqli_query($this->conn,"SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='$selectedDB' AND `TABLE_NAME`='$table';");
             $result = mysqli_query($this->conn,"SELECT * FROM `$table`");
             
             // Check if table is empty.  
