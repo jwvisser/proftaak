@@ -124,6 +124,12 @@ body {
 .italicised {
     font-style: italic;
 }
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
 /*
     Footer
 */
