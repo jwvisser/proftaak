@@ -1,106 +1,132 @@
 <?php
 
-class db {
+class db
+{
 
     private $db;
     private $conn;
-    private $database;
+    private $pdo;
 
-    public function __construct() {
+    public function __construct()
+    {
         include('dbCredentials.php');
-        $this->database = $database;
 
-        // Create connection
-        $this->conn = new mysqli($servername, $username, $password,$database);
-        
-        // Check connection
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-        } 
-        echo "Database connected succesfully!"."<br><br>";
+        $options = [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES   => false,
+        ];
+        $dsn = "mysql:host={$host};dbname={$db};charset={$charset}";
+        try {
+            $pdo = new PDO($dsn, $user, $pass, $options);
+
+        } catch (\PDOException $e) {
+            throw new \PDOException($e->getMessage(), (int)$e->getCode());
+        }
+        $this->pdo = $pdo;
     }
 
-    // Generate a HTML table from table name and (optional) fields
-    public function returnTable($table, $fields){
-        
-        // Check if custom field selection is empty or not.
-        if($fields == ""){
-            // Run query to get field names from table. 
-            $selectedDB = $this->database;
 
-            $query = mysqli_query($this->conn,"SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='$selectedDB' AND `TABLE_NAME`='$table';");
-            $result = mysqli_query($this->conn,"SELECT * FROM `$table`");
-            
-            // Check if table is empty.  
-            if(mysqli_num_rows($result) > 0) {
-                
-                // Convert column names to array
-                while($row = $query->fetch_assoc()){
-                    $columns[] = $row;
-                }
-                $columnArr = array_column($columns, 'COLUMN_NAME');
+    // Generate a HTML table from table name and (optional) fields
+    public function returnTable($table, $fields, $filter)
+    {
+
+        $fieldArray = "";
+
+        if ($filter !== "") {
+            $filter = " WHERE " . $filter;
+        }
+
+        $sql = "SELECT count(*) FROM " . $table;
+        $result = $this->pdo->prepare($sql);
+        $result->execute();
+        $count = $result->fetchColumn();
+
+        if ($fields !== "") {
+            $sql = 'SELECT ' . $fields . ' FROM `' . $table . '`' . @$filter;
+            $fieldArray = explode(',', $fields);
+        } else {
+            $sql = 'SELECT * FROM `' . $table . '`' . @$filter;
+        }
+
+        if ($count > 0) {
+            if ($fieldArray !== "") {
                 // Starting HTML of table
                 echo '<table cellpadding="0" cellspacing="0" class="db-table">';
                 // Create dynamic header for each column name. 
                 echo '<tr>';
-                foreach ($columnArr as $key => $value) {
-                    echo "<th>".$value."</th>";
+                foreach ($fieldArray as $key => $value) {
+                    echo "<th>" . $value . "</th>";
                 }
                 echo '</tr>';
-                while($row = mysqli_fetch_row($result)) {
-                    echo '<tr>';
-                    foreach($row as $key=>$value) {
-                        echo '<td>',$value,'</td>';
-                    }
-                    echo '</tr>';
-                }
-                echo '</table><br />';
-            }else{
-                echo "No rows found...";
-            }
-        }else{
-            // Convert string to array, sepperated by comma
-            $fieldArray = explode(',', $fields);
-
-            // Run query with specific fields. 
-            $result = mysqli_query($this->conn,"SELECT $fields FROM `$table`");
-            // Check if table is empty. 
-            if(mysqli_num_rows($result) > 0) {
-                
+            } else {
+                $fieldArray = $this->getColumnNames($table);
+                // Starting HTML of table
                 echo '<table cellpadding="0" cellspacing="0" class="db-table">';
+                // Create dynamic header for each column name. 
                 echo '<tr>';
                 foreach ($fieldArray as $key => $value) {
-                    echo "<th>".$value."</th>";
+                    echo "<th>" . $value . "</th>";
                 }
                 echo '</tr>';
-                while($row = mysqli_fetch_row($result)) {
-                    echo '<tr>';
-                    foreach($row as $key=>$value) {
-                        echo '<td>',$value,'</td>';
-                    }
-                    echo '</tr>';
-                }
-                echo '</table><br />';
-            }else{
-                echo "No rows found...";
             }
+            foreach ($this->pdo->query($sql) as $row) {
+                echo '<tr>';
+                foreach ($row as $key => $value) {
+                    echo '<td>', $value, '</td>';
+                }
+                echo '</tr>';
+            }
+            echo '</table><br />';
+        } else {
+            echo "No rows found...";
+        }
+        $this->DBClose();
+    }
+
+    function getColumnNames($table)
+    {
+        $sql = 'select column_name from information_schema.columns where lower(table_name)=lower(\'' . $table . '\')';
+
+        $stmt = $this->pdo->prepare($sql);
+
+        try {
+            if ($stmt->execute()) {
+                $raw_column_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($raw_column_data as $outer_key => $array) {
+                    foreach ($array as $inner_key => $value) {
+                        if (!(int)$inner_key) {
+                            $this->column_names[] = $value;
+                        }
+                    }
+                }
+            }
+
+            return $this->column_names;
+        } catch (Exception $e) {
+            return $e->getMessage(); //return exception 
         }
     }
-    
-    public function getQuery(){
+
+    public function getQuery()
+    {
 
     }
 
-    public function updateQuery($table,$fields){
-        
+    public function updateQuery($table, $fields)
+    {
+
     }
 
-    public function deleteQuery($table,$fields){
-        
+    public function deleteQuery($table, $fields)
+    {
+
     }
 
-    public function DBClose(){
-        $conn->close();
+    private function DBClose()
+    {
+        $this->pdo = null;
     }
 }
 
