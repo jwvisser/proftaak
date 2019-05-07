@@ -1,4 +1,4 @@
-﻿<?php include("components/header.php"); ?>
+﻿<?php include("header.php"); ?>
 
 <?php if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
@@ -80,4 +80,4 @@
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAW1JYS_s-x7et0OKs8Z-jYaLSMYivz-Ow&callback=initMap"></script>
 
-<?php include("components/footer.php"); ?>
+<?php include("footer.php"); ?>
