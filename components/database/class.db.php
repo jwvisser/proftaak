@@ -11,6 +11,8 @@ class db
     {
         include('dbCredentials.php');
 
+        $this->db = $db;
+
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -61,15 +63,18 @@ class db
                 echo '</tr>';
             } else {
                 $fieldArray = $this->getColumnNames($table);
+
                 // Starting HTML of table
                 echo '<table cellpadding="0" cellspacing="0" class="db-table">';
-                // Create dynamic header for each column name. 
+
+                // Create dynamic header for each column name.
                 echo '<tr>';
                 foreach ($fieldArray as $key => $value) {
                     echo "<th>" . $value . "</th>";
                 }
                 echo '</tr>';
             }
+
             foreach ($this->pdo->query($sql) as $row) {
                 echo '<tr>';
                 foreach ($row as $key => $value) {
@@ -77,6 +82,7 @@ class db
                 }
                 echo '</tr>';
             }
+
             echo '</table><br />';
         } else {
             echo "No rows found...";
@@ -86,7 +92,7 @@ class db
 
     function getColumnNames($table)
     {
-        $sql = 'select column_name from information_schema.columns where lower(table_name)=lower(\'' . $table . '\')';
+        $sql = 'select column_name from information_schema.columns where lower(table_name)=lower(\''.$table.'\') and lower(table_schema)=lower(\''.$this->db.'\')';
 
         $stmt = $this->pdo->prepare($sql);
 
