@@ -27,6 +27,12 @@ body {
     padding-bottom: 10px;
 }
 
+.secondTopNav{
+    position:absolute;
+    top:5px;
+    right:10px;
+}
+
 .topnavbar a {
     color: #611D6A;
     text-decoration: none;
@@ -250,7 +256,7 @@ body {
     margin-top: 25px;
 }
 
-input[type=text], textarea {
+input[type=text],input[type=password], textarea {
     font-family: 'Lato', sans-serif;
     background-color: #FFF2F7;
     width: 100%;

@@ -1,0 +1,11 @@
+{
+    "name": "robbert/smartcaps",
+    "description": "Smartcaps proftaak",
+    "type": "project",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "smartcaps\\": "src/"
+        }
+    }
+}

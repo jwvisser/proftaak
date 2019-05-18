@@ -1,8 +1,9 @@
 <?php
 
+namespace smartcaps;
+
 class db
 {
-
     private $db;
     private $conn;
     private $pdo;
@@ -14,13 +15,13 @@ class db
         $this->db = $db;
 
         $options = [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES   => false,
+            \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+            \PDO::ATTR_EMULATE_PREPARES   => false,
         ];
         $dsn = "mysql:host={$host};dbname={$db};charset={$charset}";
         try {
-            $pdo = new PDO($dsn, $user, $pass, $options);
+            $pdo = new \PDO($dsn, $user, $pass, $options);
 
         } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
@@ -92,13 +93,15 @@ class db
 
     function getColumnNames($table)
     {
-        $sql = 'select column_name from information_schema.columns where lower(table_name)=lower(\''.$table.'\') and lower(table_schema)=lower(\''.$this->db.'\')';
+        $sql = 'select column_name 
+        from information_schema.columns 
+        where lower(table_name)=lower(\'' . $table . '\') and lower(table_schema)=lower(\'' . $this->db . '\')';
 
         $stmt = $this->pdo->prepare($sql);
 
         try {
             if ($stmt->execute()) {
-                $raw_column_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $raw_column_data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
                 foreach ($raw_column_data as $outer_key => $array) {
                     foreach ($array as $inner_key => $value) {
@@ -115,9 +118,21 @@ class db
         }
     }
 
-    public function getQuery()
+    public function getQuery($query)
     {
+        /* Delete all rows from the FRUIT table */
+        $executedQuery = $this->pdo->prepare($query);
+        $executedQuery->execute();
+        return $executedQuery;
+    }
 
+    public function getRowCount($query){
+        /* Delete all rows from the FRUIT table */
+        $executedQuery = $this->pdo->prepare($query);
+        $executedQuery->execute();
+
+        $count = $executedQuery->rowCount();
+        return $count;
     }
 
     public function updateQuery($table, $fields)

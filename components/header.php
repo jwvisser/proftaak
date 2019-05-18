@@ -1,6 +1,11 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+require_once('./vendor/autoload.php');
+
+session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -17,10 +22,16 @@ ini_set('display_errors', 1);
             <div class="topnavbackground">
                 <div class="topnavbar">
                     <span>SMARTCAPS</span>
-                    <a href="index.php">Home</a>
-                    <a href="about-us.php">Over Ons</a>
-                    <a href="contact.php">Contact</a>
-                    <a href="products.php">Voedingswaarden</a>
+                    <a href="./">Home</a>
+                    <a href="./products">Voedingswaarden</a>
+                    <a href="./about-us">Over Ons</a>
+                    <a href="./contact">Contact</a>
+                </div>
+                <div class="secondTopNav">
+                    <?php 
+                    if(@$_SESSION['login_Status'] == true) echo '<a href="./logout">logout</a>';
+                    else echo '<a href="./login">Login</a>'; ?> 
+                    | <a href="#">NL</a> / <a href="#">EN</a>
                 </div>
             </div>
             <div class="headerbackground">

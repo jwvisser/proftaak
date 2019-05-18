@@ -1,10 +1,8 @@
 <?php
 include("components/header.php");
 
-require_once('components/database/class.db.php');
-
-$db = new db;
-$db->returnTable("customer","","");
+// $db = new smartcaps\db();
+// $db->returnTable("customer","","");
 
 ?>
 

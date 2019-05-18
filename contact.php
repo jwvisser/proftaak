@@ -1,4 +1,4 @@
-﻿<?php include("header.php"); ?>
+﻿<?php include("components/header.php"); ?>
 
 <?php
 
@@ -138,4 +138,4 @@
 
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAW1JYS_s-x7et0OKs8Z-jYaLSMYivz-Ow&callback=initMap"></script>
 
-<?php include("footer.php"); ?>
+<?php include("components/footer.php"); ?>
