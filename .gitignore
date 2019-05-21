@@ -1,3 +1,4 @@
 
-/components/dbCredentials.php
+/src/dbCredentials.php
 /vendor/
+.idea

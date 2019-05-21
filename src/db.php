@@ -61,6 +61,7 @@ class db
                 foreach ($fieldArray as $key => $value) {
                     echo "<th>" . $value . "</th>";
                 }
+                if(@$_SESSION['login_Status'] == true) {echo '<th> Edit </th>'; echo '<th> Delete </th>';}
                 echo '</tr>';
             } else {
                 $fieldArray = $this->getColumnNames($table);

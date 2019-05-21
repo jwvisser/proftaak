@@ -4,6 +4,8 @@ ini_set('display_errors', 1);
 
 require_once('./vendor/autoload.php');
 
+$languageswitch = new smartcaps\translate();
+
 session_start();
 
 ?>
@@ -32,7 +34,7 @@ session_start();
                     <?php 
                     if(@$_SESSION['login_Status'] == true)  echo '<a href="./logout">logout</a>' . ' | ' . '<a href="./dashboard">Dashboard</a>';
                     else echo '<a href="./login">Login</a>'; ?>
-                    | <a href="#">NL</a> / <a href="#">EN</a>
+                    | <a href="?language=nl">NL</a> / <a href="?language=en">EN</a>
                 </div>
             </div>
             <div class="headerbackground">
