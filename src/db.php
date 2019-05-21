@@ -126,13 +126,20 @@ class db
         }
     }
 
-    public function runQuery($query)
+    public function getContent($query)
     {
         $executedQuery = $this->pdo->prepare($query);
         foreach ($this->pdo->query($query) as $row) {
             $result =  $row['html'] . "\t";
         }
         return $result;
+    }
+
+    public function runQuery($query)
+    {
+        $executedQuery = $this->pdo->prepare($query);
+        $executedQuery->execute();
+        return $executedQuery;
     }
 
     public function getRowCount($query){

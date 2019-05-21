@@ -26,7 +26,7 @@ class translate
 
     public function getHTML($page, $contentID){
         $db = new db;
-        $result = $db->runQuery('SELECT `html` FROM `content` WHERE `language` = "'.$_COOKIE['language'].'" AND `page` = "'.$page.'" AND `contentID` = "'.$contentID.'"');
+        $result = $db->getContent('SELECT `html` FROM `content` WHERE `language` = "'.$_COOKIE['language'].'" AND `page` = "'.$page.'" AND `contentID` = "'.$contentID.'"');
         echo $result;
     }
 }
