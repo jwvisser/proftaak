@@ -9,12 +9,17 @@ class translate
 
     public function __construct()
     {
+        $this->currentPage =  ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME));
         if(isset($_GET['language'])) {
-            $this->currentPage =  ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME));
             $this->language = $_GET['language'];
 
             echo $this->language . "<br>";
             setcookie("language", $this->language);
+            header("Refresh:0; url=".$this->currentPage);
+        }
+
+        if(!isset($_COOKIE['language']) && $_COOKIE['language'] == ""){
+            setcookie("language", 'nl');
             header("Refresh:0; url=".$this->currentPage);
         }
     }

@@ -1,6 +1,7 @@
-<?php 
+<?php
 
-$servername = "";
-$username = "";
-$password = "";
-$database = "";
+$host = "";
+$user = "";
+$pass = "";
+$db = "";
+$charset = "";
