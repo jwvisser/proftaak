@@ -129,8 +129,10 @@ class db
     public function runQuery($query)
     {
         $executedQuery = $this->pdo->prepare($query);
-        $executedQuery->execute();
-        return $executedQuery;
+        foreach ($this->pdo->query($query) as $row) {
+            $result =  $row['html'] . "\t";
+        }
+        return $result;
     }
 
     public function getRowCount($query){
