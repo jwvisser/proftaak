@@ -1,8 +1,8 @@
 <?php
 include("components/header.php");
 
-// $db = new smartcaps\db();
-// $db->returnTable("customer","","");
+ $db = new smartcaps\db();
+ $db->returnTable("customer","","");
 
 ?>
 

@@ -21,7 +21,7 @@ session_start();
         <div class="footerpusher">
             <div class="topnavbackground">
                 <div class="topnavbar">
-                    <span>SMARTCAPS</span>
+                    <span><a href="./">SMARTCAPS</a></span>
                     <a href="./">Home</a>
                     <a href="./products">Voedingswaarden</a>
                     <a href="./about-us">Over Ons</a>
@@ -29,8 +29,8 @@ session_start();
                 </div>
                 <div class="secondTopNav">
                     <?php 
-                    if(@$_SESSION['login_Status'] == true) echo '<a href="./logout">logout</a>';
-                    else echo '<a href="./login">Login</a>'; ?> 
+                    if(@$_SESSION['login_Status'] == true)  echo '<a href="./logout">logout</a>' . ' | ' . '<a href="./dashboard">Dashboard</a>';
+                    else echo '<a href="./login">Login</a>'; ?>
                     | <a href="#">NL</a> / <a href="#">EN</a>
                 </div>
             </div>

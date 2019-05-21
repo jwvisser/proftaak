@@ -73,13 +73,20 @@ class db
                 foreach ($fieldArray as $key => $value) {
                     echo "<th>" . $value . "</th>";
                 }
+                if(@$_SESSION['login_Status'] == true) {echo '<th> Edit </th>'; echo '<th> Delete </th>';}
                 echo '</tr>';
+
             }
 
             foreach ($this->pdo->query($sql) as $row) {
+
                 echo '<tr>';
                 foreach ($row as $key => $value) {
                     echo '<td>', $value, '</td>';
+                }
+                if(@$_SESSION['login_Status'] == true) {
+                    echo '<td> <a href="./edit?ID='.$row['ID'].'">Edit</a> </td>';
+                    echo '<td> <a onclick="return confirm(\'Are you sure?\')" href="./delete?ID='.$row['ID'].'">Delete</a> </td>';
                 }
                 echo '</tr>';
             }
@@ -118,16 +125,14 @@ class db
         }
     }
 
-    public function getQuery($query)
+    public function runQuery($query)
     {
-        /* Delete all rows from the FRUIT table */
         $executedQuery = $this->pdo->prepare($query);
         $executedQuery->execute();
         return $executedQuery;
     }
 
     public function getRowCount($query){
-        /* Delete all rows from the FRUIT table */
         $executedQuery = $this->pdo->prepare($query);
         $executedQuery->execute();
 
@@ -135,7 +140,12 @@ class db
         return $count;
     }
 
-    public function updateQuery($table, $fields)
+    public function insertQuery($table, $fields, $values){
+        $executedQuery = $this->pdo->prepare("");
+        $executedQuery->execute();
+    }
+
+    public function updateQuery($table, $fields, $values)
     {
 
     }
