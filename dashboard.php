@@ -9,6 +9,7 @@ include("components/header.php");
 
     $products = new smartcaps\db();
     $users = new smartcaps\db();
+    $ingredients = new smartcaps\db();
 ?>
 
 <style>
@@ -19,6 +20,10 @@ include("components/header.php");
     }
     .item{
         padding:10px;
+    }
+
+    .content {
+        width: 85% !important;
     }
 </style>
 

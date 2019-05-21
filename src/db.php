@@ -85,8 +85,8 @@ class db
                     echo '<td>', $value, '</td>';
                 }
                 if(@$_SESSION['login_Status'] == true) {
-                    echo '<td> <a href="./edit?ID='.$row['ID'].'">Edit</a> </td>';
-                    echo '<td> <a onclick="return confirm(\'Are you sure?\')" href="./delete?ID='.$row['ID'].'">Delete</a> </td>';
+                    echo '<td> <a href="./edit?table='.$table.'&id='.$row['ID'].'"><i class="material-icons">edit</i></a> </td>';
+                    echo '<td> <a onclick="return confirm(\'Are you sure?\')" href="./delete?table='.$table.'&id='.$row['ID'].'"><i class="material-icons">cancel</i></a></td>';
                 }
                 echo '</tr>';
             }

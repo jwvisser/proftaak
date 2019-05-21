@@ -3,6 +3,15 @@
 <h1>Leer smartcaps kennen</h1>
 <h2>oprichters, achtergrond en geschiedenis</h2>
 
+<style>
+    .row:first-of-type{
+        display:flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content; center;
+    }
+</style>
+
 <div class="row">
     <div class="column">
         <div class="centerImage">
@@ -21,6 +30,12 @@
             <img src="assets/fotoJW.jpg" alt="Jan-Willem Visser" class="aboutPic">
         </div>
         <p>Ik ben Jan-Willem Visser. Ik ben 21 jaar oud en kom uit Sleeuwijk. Naast mijn werkzaamheden bij SmartCaps werk ik nog bij een ICT bedrijf dat software ontwikkelt voor kinderdagverblijven. Hiervoor volg ik nu een opleiding Informatica, om mijn kennis uit te breiden op dit gebied. Mijn doel binnen SmartCaps is om de klant tevreden te stellen. Als je contact met ons opneemt, zal je vaak een reactie krijgen van mij.</p>
+    </div>
+    <div class="column">
+        <div class="centerImage">
+            <img src="assets/fotoRDV.jpg" alt="Robbert de Vries" class="aboutPic">
+        </div>
+        <p>Ik ben Robbert de Vries. Ik ben 21 jaar oud en kom uit Son en Breugel.</p>
     </div>
 </div>
 <hr>
