@@ -30,10 +30,43 @@ include("components/header.php");
 <div class="container">
     <div class="item">
         <?php $products->returnTable("product","",""); ?>
+        <form id="product" class="updateForm" method="post">
+            <input name="ID" type="hidden" value="<?php echo @$_GET['id'] ?>">
+            <?php $products->updateQuery('product', 'name,costprice,sellingprice'); ?>
+        </form>
     </div>
     <div class="item">
         <?php $users->returnTable("user","",""); ?>
+        <form id="user" class="updateForm" method="post">
+            <input name="ID" type="hidden" value="<?php echo @$_GET['id'] ?>">
+            <?php $products->updateQuery('user', 'username'); ?>
+        </form>
     </div>
 </div>
+
+<script>
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+
+    var table = getUrlParameter('table');
+
+    if($('#'+table).is(":visible")){
+        $('#'+table).hide();
+    } else{
+        $('#'+table).show();
+    }
+</script>
 
 <?php include("components/footer.php"); ?>

@@ -86,8 +86,8 @@ class db
                     echo '<td>', $value, '</td>';
                 }
                 if(@$_SESSION['login_Status'] == true) {
-                    echo '<td> <a href="./edit?table='.$table.'&id='.$row['ID'].'"><i class="material-icons">edit</i></a> </td>';
-                    echo '<td> <a onclick="return confirm(\'Are you sure?\')" href="./delete?table='.$table.'&id='.$row['ID'].'"><i class="material-icons">cancel</i></a></td>';
+                    echo '<td> <a class="editButton" href="?table='.$table.'&id='.$row['ID'].'"><i class="material-icons">edit</i></a> </td>';
+                    echo '<td> <a class="deleteButton" onclick="return confirm(\'Are you sure?\')" href="?table='.$table.'&id='.$row['ID'].'"><i class="material-icons">cancel</i></a></td>';
                 }
                 echo '</tr>';
             }
@@ -96,7 +96,6 @@ class db
         } else {
             echo "No rows found...";
         }
-        $this->DBClose();
     }
 
     function getColumnNames($table)
@@ -155,9 +154,45 @@ class db
         $executedQuery->execute();
     }
 
-    public function updateQuery($table, $fields, $values)
+    public function updateQuery($table, $fields)
     {
+        $inputs = "";
+        $updatedFields = "";
 
+        $fieldArray = explode(',' , $fields);
+
+        if(isset($_POST['update'.$table])){
+            $id = $_POST['ID'];
+            unset($_POST['ID']);
+            unset($_POST['update'.$table]);
+
+            foreach($_POST as $key => $v){
+                if($_POST[$key] == ""){
+                    unset($_POST[$key]);
+                }
+            }
+
+            $lastElement = end($_POST);
+
+            foreach($_POST as $key => $v){
+                if($v !== $lastElement){
+                    $updatedFields .= "`$key` = '$v',";
+                }else{
+                    $updatedFields .= "`$key` = '$v'";
+                }
+            }
+
+            $executedQuery = $this->pdo->prepare("UPDATE `$table` SET $updatedFields WHERE `$table`.`ID` = '$id';");
+            $executedQuery->execute();
+            $this->currentPage =  ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME));
+            header("Refresh:0; url=".$this->currentPage);
+        }
+
+        foreach($fieldArray as $field){
+            $inputs .=  '<input style="text-transform:capitalize" placeholder="'.$field.'" name="'.$field.'" type="text">';
+        }
+        $inputs .=  '<input style="text-transform:capitalize" value="Update" name="update'.$table.'" type="submit">';
+        echo $inputs;
     }
 
     public function deleteQuery($table, $fields)

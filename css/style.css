@@ -326,3 +326,8 @@ td {
     background: #FAFAFA;
     text-align: center;
 }
+
+
+.updateForm{
+    display:none;
+}
