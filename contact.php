@@ -8,7 +8,17 @@
 		$data = htmlspecialchars($data);
 		return $data;
 	}
-
+        $voornaamError = '';
+        $voornaam = '';
+        $achternaamError = '';
+        $achternaam = '';
+        $emailError = '';
+        $email = '';
+        $onderwerpError = '';
+        $onderwerp = '';
+        $berichtError = '';
+        $bericht = '';
+        
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 		if (empty($_POST["voornaam"])) {
