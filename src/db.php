@@ -2,13 +2,15 @@
 
 namespace smartcaps;
 
-class db {
+class db
+{
 
     private $db;
     private $conn;
     private $pdo;
 
-    public function __construct() {
+    public function __construct()
+    {
         include('dbCredentials.php');
 
         $this->db = $db;
@@ -22,13 +24,30 @@ class db {
         try {
             $pdo = new \PDO($dsn, $user, $pass, $options);
         } catch (\PDOException $e) {
-            throw new \PDOException($e->getMessage(), (int) $e->getCode());
+            throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
         $this->pdo = $pdo;
     }
 
+    public function returnProducts(){
+        $html = "";
+
+        $sql = "SELECT * FROM `product`";
+
+        foreach ($this->pdo->query($sql) as $row) {
+            $html .=
+            "<div class='product'>
+              <h3 class='title' style='text-transform:capitalize;'>".$row['name']."</h3>
+              <span class='price'>".$row['price']."</span>
+            </div>";
+        }
+
+        return $html;
+    }
+
     // Generate a HTML table from table name and (optional) fields
-    public function returnTable($table, $fields, $filter) {
+    public function returnTable($table, $fields, $filter)
+    {
 
         $fieldArray = "";
 
@@ -88,7 +107,7 @@ class db {
                 }
                 if (@$_SESSION['login_Status'] == true) {
                     echo '<td> <a class="editButton" href="?table=' . $table . '&id=' . $row['ID'] . '"><i class="material-icons">edit</i></a> </td>';
-                    echo '<td> <a class="deleteButton" onclick="return confirm(\'Are you sure?\')" href="?table=' . $table . '&id=' . $row['ID'] . '"><i class="material-icons">cancel</i></a></td>';
+                    echo '<td> <a class="deleteButton" onclick="return confirm(\'Are you sure?\')" href="./delete?table=' . $table . '&id=' . $row['ID'] . '"><i class="material-icons">cancel</i></a></td>';
                 }
                 echo '</tr>';
             }
@@ -99,7 +118,8 @@ class db {
         }
     }
 
-    function getColumnNames($table) {
+    function getColumnNames($table)
+    {
         $sql = 'select column_name 
         from information_schema.columns 
         where lower(table_name)=lower(\'' . $table . '\') and lower(table_schema)=lower(\'' . $this->db . '\')';
@@ -112,7 +132,7 @@ class db {
 
                 foreach ($raw_column_data as $outer_key => $array) {
                     foreach ($array as $inner_key => $value) {
-                        if (!(int) $inner_key) {
+                        if (!(int)$inner_key) {
                             $this->column_names[] = $value;
                         }
                     }
@@ -125,7 +145,8 @@ class db {
         }
     }
 
-    public function getContent($query) {
+    public function getContent($query)
+    {
         $executedQuery = $this->pdo->prepare($query);
         foreach ($this->pdo->query($query) as $row) {
             $result = $row['html'] . "\t";
@@ -133,13 +154,15 @@ class db {
         return $result;
     }
 
-    public function runQuery($query) {
+    public function runQuery($query)
+    {
         $executedQuery = $this->pdo->prepare($query);
         $executedQuery->execute();
         return $executedQuery;
     }
 
-    public function getRowCount($query) {
+    public function getRowCount($query)
+    {
         $executedQuery = $this->pdo->prepare($query);
         $executedQuery->execute();
 
@@ -147,19 +170,21 @@ class db {
         return $count;
     }
 
-    public function insertQuery($table, $fields, $values) {
+    public function insertQuery($table, $fields, $values)
+    {
         $executedQuery = $this->pdo->prepare("");
         $executedQuery->execute();
     }
 
-    public function updateQuery($table, $fields) {
+    public function updateQuery($table, $fields)
+    {
         $inputs = "";
         $updatedFields = "";
 
         $fieldArray = explode(',', $fields);
 
-        $id = (int) (isset($_POST['ID']) ? $_POST['ID'] : $_GET['id']);
-        
+        $id = (int)(isset($_POST['ID']) ? $_POST['ID'] : $_GET['id']);
+
         if (isset($_POST['update' . $table])) {
             unset($_POST['ID']);
             unset($_POST['update' . $table]);
@@ -179,10 +204,11 @@ class db {
                     $updatedFields .= "`$key` = '$v'";
                 }
             }
-            
+
             $executedQuery = $this->pdo->prepare("UPDATE `$table` SET $updatedFields WHERE `$table`.`ID` = :id");
             $executedQuery->bindParam(':id', $id, \PDO::PARAM_INT);
             $executedQuery->execute();
+
             $this->currentPage = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME));
             header("Refresh:0; url=" . $this->currentPage);
         }
@@ -191,7 +217,7 @@ class db {
         $executedQuery->bindParam(':id', $id, \PDO::PARAM_INT);
         $executedQuery->execute();
         $row = $executedQuery->fetch(\PDO::FETCH_ASSOC);
-
+        $inputs .= "Selected: " . $id;
         foreach ($fieldArray as $field) {
             $inputs .= '<input style="text-transform:capitalize" placeholder="' . $field . '" value="' . ((!empty($row) && isset($row[$field])) ? $row[$field] : '') . '" name="' . $field . '" type="text">';
         }
@@ -199,14 +225,23 @@ class db {
         echo $inputs;
     }
 
-    public function deleteQuery($table, $fields) {
-        
+    public function deleteQuery($table, $id)
+    {
+        $executedQuery = $this->pdo->prepare("DELETE FROM `$table` WHERE `ID`=:id");
+        $executedQuery->bindParam(':id', $id, \PDO::PARAM_INT);
+        $executedQuery->execute();
+
+        echo "
+            <script>
+                javascript:window.history.back();
+            </script>
+        ";
     }
 
-    private function DBClose() {
+    private function DBClose()
+    {
         $this->pdo = null;
     }
-
 }
 
 ?>
