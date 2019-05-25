@@ -20,6 +20,12 @@ session_start();
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Lato|Lora|Source+Sans+Pro" rel="stylesheet"> 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+        <!--    Toastr    -->
+        <link href="css/toastr.css" rel="stylesheet"/>
+        <script src="js/toastr.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     </head>
     <body>
         <div class="footerpusher">
@@ -27,6 +33,7 @@ session_start();
                 <div class="topnavbar">
                     <span><a href="./">SMARTCAPS</a></span>
                     <a href="./">Home</a>
+                    <a href="./shop">Shop</a>
                     <a href="./products">Voedingswaarden</a>
                     <a href="./about-us">Over Ons</a>
                     <a href="./contact">Contact</a>

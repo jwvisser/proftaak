@@ -38,7 +38,8 @@ class db
             $html .=
             "<div class='product'>
               <h3 class='title' style='text-transform:capitalize;'>".$row['name']."</h3>
-              <span class='price'>".$row['price']."</span>
+              <span class='price'>€".$row['price'].",-</span>
+              <button id='addToCart".$row['ID']."' onclick='addProduct(".$row['ID'].");'>Koop nu!</button>
             </div>";
         }
 
