@@ -86,14 +86,15 @@ $db = new smartcaps\db();
     function addProduct(id){
         var products = Cookies.get('cart');
         var productsArray = products.split(',');
-        console.log(productsArray);
         element = ''+id+'';
         productsArray.push(element);
+        productsArray = productsArray.filter(Boolean);
+        console.log(productsArray);
         productsArray = productsArray.toString();
         Cookies.set('cart', productsArray);
         $('#addToCart'+id).text("Product toegevoegd");
         $('#addToCart'+id).attr("onclick","removeProduct("+id+")");
-        toastr.success('Product toegevoegd aan winkelwagen')
+        toastr.success('Product toegevoegd aan winkelwagen');
     }
 
     function removeProduct(id){
@@ -105,7 +106,7 @@ $db = new smartcaps\db();
         Cookies.set('cart', productsArray);
         $('#addToCart'+id).text("koop nu!");
         $('#addToCart'+id).attr("onclick","addProduct("+id+")");
-        toastr.warning('Product verwijdert uit winkelwagen')
+        toastr.warning('Product verwijdert uit winkelwagen');
     }
     console.log(productsArray);
 </script>

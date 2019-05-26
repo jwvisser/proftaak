@@ -8,17 +8,19 @@ class db
     private $db;
     private $conn;
     private $pdo;
+    private $page;
 
     public function __construct()
     {
+        $this->page = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME));
         include('dbCredentials.php');
 
         $this->db = $db;
 
         $options = [
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
-            \PDO::ATTR_EMULATE_PREPARES => false,
+            \PDO::ATTR_EMULATE_PREPARES   => false,
         ];
         $dsn = "mysql:host={$host};dbname={$db};charset={$charset}";
         try {
@@ -29,21 +31,37 @@ class db
         $this->pdo = $pdo;
     }
 
-    public function returnProducts(){
+    public function returnProducts()
+    {
         $html = "";
+        if ($this->page == "Winkelwagen") {
+            $products = explode(',', $_COOKIE['cart']);
+            foreach ($products as $index => $value) {
+                $sql = "SELECT * FROM `product` WHERE `ID` = '$value'";
+                foreach ($this->pdo->query($sql) as $row) {
+                    $html .=
+                        "<div class='product'>
+                          <h3 class='title' style='text-transform:capitalize;'>" . $row['name'] . "</h3>
+                          <span class='price'>€" . $row['price'] . ",-</span>
+                          <button id='removeButton".$row['ID']."' class='removeButton' onclick='removeProduct(" . $row['ID'] . ");'>Verwijder</button>
+                        </div>";
+                }
+            }
+            return $html;
+        } else {
+            $sql = "SELECT * FROM `product`";
 
-        $sql = "SELECT * FROM `product`";
-
-        foreach ($this->pdo->query($sql) as $row) {
-            $html .=
-            "<div class='product'>
-              <h3 class='title' style='text-transform:capitalize;'>".$row['name']."</h3>
-              <span class='price'>€".$row['price'].",-</span>
-              <button id='addToCart".$row['ID']."' onclick='addProduct(".$row['ID'].");'>Koop nu!</button>
+            foreach ($this->pdo->query($sql) as $row) {
+                $html .=
+                    "<div class='product'>
+              <h3 class='title' style='text-transform:capitalize;'>" . $row['name'] . "</h3>
+              <span class='price'>€" . $row['price'] . ",-</span>
+              <button id='addToCart" . $row['ID'] . "' onclick='addProduct(" . $row['ID'] . ");'>Koop nu!</button>
             </div>";
-        }
+            }
 
-        return $html;
+            return $html;
+        }
     }
 
     // Generate a HTML table from table name and (optional) fields
@@ -107,7 +125,7 @@ class db
                     echo '<td>', $value, '</td>';
                 }
                 if (@$_SESSION['login_Status'] == true) {
-                    echo '<td> <a class="editButton" href="?table=' . $table . '&id=' . $row['ID'] . '"><i class="material-icons">edit</i></a> </td>';
+                    echo '<td> <a class="editButton" href="?table=' . $table . '&id=' . $row['ID'] . '#' . $table . '"><i class="material-icons">edit</i></a> </td>';
                     echo '<td> <a class="deleteButton" onclick="return confirm(\'Are you sure?\')" href="./delete?table=' . $table . '&id=' . $row['ID'] . '"><i class="material-icons">cancel</i></a></td>';
                 }
                 echo '</tr>';
@@ -152,6 +170,7 @@ class db
         foreach ($this->pdo->query($query) as $row) {
             $result = $row['html'] . "\t";
         }
+
         return $result;
     }
 
@@ -159,6 +178,7 @@ class db
     {
         $executedQuery = $this->pdo->prepare($query);
         $executedQuery->execute();
+
         return $executedQuery;
     }
 
@@ -168,6 +188,7 @@ class db
         $executedQuery->execute();
 
         $count = $executedQuery->rowCount();
+
         return $count;
     }
 
