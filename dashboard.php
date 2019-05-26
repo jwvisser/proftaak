@@ -45,13 +45,56 @@ $ingredients = new smartcaps\db();
 </div>
 <div class="container">
     <div class="item">
-        <form action="upload-manager.php" method="post" enctype="multipart/form-data">
-            <h2>Upload File</h2>
-            <label for="fileSelect">Filename:</label>
+        <form action="uploadManagerImage.php" method="post" enctype="multipart/form-data">
+            <h3>Upload afbeeldingen</h3>
+            <label for="fileSelect">Bestandsnaam:</label>
             <input type="file" name="photo" id="fileSelect">
             <input type="submit" name="submit" value="Upload">
-            <p><strong>Note:</strong> Only .jpg, .jpeg, .gif, .png formats allowed to a max size of 5 MB.</p>
+            <p><strong>NB:</strong> Alleen .jpg, .jpeg, .gif, .png zijn toegestane formaten met een grote van maximaal 5MB.</p>
         </form>
+        <?php
+        $files = glob("uploads/*.*");
+        for ($i = 0; $i < count($files); $i++) {
+            $image = $files[$i];
+            $supported_file = array(
+                'gif',
+                'jpg',
+                'jpeg',
+                'png'
+            );
+
+            $ext = strtolower(pathinfo($image, PATHINFO_EXTENSION));
+            if (in_array($ext, $supported_file)) {
+                echo '<a href="' . $image . '">' . substr($image, 8) . '</a><br>';
+            } else {
+                continue;
+            }
+        }
+        ?>
+    </div>
+    <div class="item">
+         <form action="uploadManagerCsv.php" method="post" enctype="multipart/form-data">
+            <h3>Upload CSV-bestand</h3>
+            <label for="fileSelect">Bestandsnaam:</label>
+            <input type="file" name="fileToUpload" accept=".csv">
+            <input type="submit" value="Upload" name="submit">
+        </form>
+        <?php
+        $csvFiles = glob("uploads/*.csv");
+        for ($i = 0; $i < count($csvFiles); $i++) {
+            $csv = $csvFiles[$i];
+            $supported_file = array(
+                'csv'
+            );
+
+            $ext = strtolower(pathinfo($csv, PATHINFO_EXTENSION));
+            if (in_array($ext, $supported_file)) {
+                echo '<a href="' . $csv . '">' . substr($csv, 8) . '</a><br>';
+            } else {
+                continue;
+            }
+        }
+        ?>
     </div>
 </div>
 
