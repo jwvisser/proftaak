@@ -225,6 +225,12 @@ body {
     About us
 */
 
+.aboutColumn {
+    width: 22%;
+    float: left;
+    margin-right: 3%;
+}
+
 .aboutPic {
     width: 100%;
     max-width: 250px;
