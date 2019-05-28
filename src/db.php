@@ -98,7 +98,6 @@ class db
     // Generate a HTML table from table name and (optional) fields
     public function returnTable($table, $fields, $filter)
     {
-
         $fieldArray = "";
 
         if ($filter !== "") {
@@ -111,8 +110,14 @@ class db
         $count = $result->fetchColumn();
 
         if ($fields !== "") {
-            $sql = 'SELECT ' . $fields . ' FROM `' . $table . '`' . @$filter;
             $fieldArray = explode(',', $fields);
+            $fields = "";
+            foreach($fieldArray as $field){
+                $fields .= "`".$field."`,";
+            }
+            $fields = rtrim($fields,',');
+
+            $sql = 'SELECT ' . $fields . ' FROM `' . $table . '`' . @$filter;
         } else {
             $sql = 'SELECT * FROM `' . $table . '`' . @$filter;
         }
@@ -156,7 +161,13 @@ class db
                     echo '<td>', $value, '</td>';
                 }
                 if (@$_SESSION['login_Status'] == true) {
-                    echo '<td> <a class="editButton" href="?table=' . $table . '&id=' . $row['ID'] . '#' . $table . '"><i class="material-icons">edit</i></a> </td>';
+                    if($this->page == "Products"){
+                        $drink = "&drink=".@$_GET['drink'];
+                    }else{
+                        $drink = "";
+                    }
+
+                    echo '<td> <a class="editButton" href="?table=' . $table . '&id=' . $row['ID'] . @$drink  . '#' . $table .'"><i class="material-icons">edit</i></a> </td>';
                     echo '<td> <a class="deleteButton" onclick="return confirm(\'Are you sure?\')" href="./delete?table=' . $table . '&id=' . $row['ID'] . '"><i class="material-icons">cancel</i></a></td>';
                 }
                 echo '</tr>';
@@ -275,9 +286,7 @@ class db
             $executedQuery = $this->pdo->prepare("UPDATE `$table` SET $updatedFields WHERE `$table`.`ID` = :id");
             $executedQuery->bindParam(':id', $id, \PDO::PARAM_INT);
             $executedQuery->execute();
-
-            $this->currentPage = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME));
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            header('Location: ' . $this->page);
         }
 
         $executedQuery = $this->pdo->prepare("SELECT * FROM `$table` WHERE `ID`=:id");

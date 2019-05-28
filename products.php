@@ -2,6 +2,9 @@
 include("components/header.php");
 
  $db = new smartcaps\db();
+
+ $drinks = $db->runQuery("SELECT * FROM ingredients");
+
 ?>
 
 <h1>Voedingswaarden producten</h1>
@@ -24,7 +27,7 @@ include("components/header.php");
 
 <?php
 if (isset($_GET['drink'])) {
-    $db->returnTable("ingredients","name,calories,amount of water, protein, saturated fats, unsaturated fats, cholesterol, carbohydrates, sugar, vitamines","ID = {$_GET['drink']}");
+    $db->returnTable("ingredients","ID,name,calories,amount of water,protein,saturated fats,unsaturated fats,cholesterol,carbohydrates,sugar,vitamines","ID = {$_GET['drink']}");
 }
 
 include("components/footer.php");
