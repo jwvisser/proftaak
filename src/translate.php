@@ -18,7 +18,7 @@ class translate
             header("Refresh:0; url=".$this->currentPage);
         }
 
-        if(!isset($_COOKIE['language']) && $_COOKIE['language'] == ""){
+        if(!isset($_COOKIE['language'])){
             setcookie("language", 'nl');
             header("Refresh:0; url=".$this->currentPage);
         }

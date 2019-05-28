@@ -18,9 +18,9 @@ class db
         $this->db = $db;
 
         $options = [
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
-            \PDO::ATTR_EMULATE_PREPARES => false,
+            \PDO::ATTR_EMULATE_PREPARES   => false,
         ];
         $dsn = "mysql:host={$host};dbname={$db};charset={$charset}";
         try {
@@ -38,7 +38,7 @@ class db
         $productNames = "";
         if ($this->page == "Winkelwagen") {
             if (isset($_COOKIE['cart'])) {
-                $products = explode(',', rtrim($_COOKIE['cart'],','));
+                $products = explode(',', rtrim($_COOKIE['cart'], ','));
                 if (empty($products) || !$products[0] == "") {
                     foreach ($products as $index => $value) {
                         $sql = "SELECT * FROM `product` WHERE `ID` = '$value'";
@@ -54,8 +54,9 @@ class db
                         }
                     }
                     echo $this->returnPriceTable($prices, $productNames);
+
                     return $html;
-                }else{
+                } else {
                     return "<style>.container-grid{display:initial !important;}</style>
                         <h1>Geen producten in winkelwagen</h1>
                         <a href='./shop'>Ga naar de winkel</a>";
@@ -162,9 +163,23 @@ class db
             }
 
             echo '</table><br />';
+            array_shift($fieldArray);
+            $fields = implode(',',$fieldArray);
+
+           echo $this->returnInsertTable($table,$fields);
         } else {
             echo "No rows found...";
         }
+    }
+
+    public function returnInsertTable($table,$fields){
+        $html = '
+            <form id="' . $table . '" class="updateForm" method="post">
+                <input name="ID" type="hidden" value="' . @$_GET['id'] . '">
+                ' . $this->updateQuery($table, $fields) . '
+            </form>
+        ';
+        return $html;
     }
 
     function getColumnNames($table)
@@ -235,7 +250,7 @@ class db
 
         $fieldArray = explode(',', $fields);
 
-        $id = (int)(isset($_POST['ID']) ? $_POST['ID'] : $_GET['id']);
+        $id = (int)(isset($_POST['ID']) ? $_POST['ID'] : @$_GET['id']);
 
         if (isset($_POST['update' . $table])) {
             unset($_POST['ID']);
@@ -262,7 +277,7 @@ class db
             $executedQuery->execute();
 
             $this->currentPage = ucfirst(pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME));
-            header("Refresh:0; url=" . $this->currentPage);
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
 
         $executedQuery = $this->pdo->prepare("SELECT * FROM `$table` WHERE `ID`=:id");
@@ -274,7 +289,7 @@ class db
             $inputs .= '<input style="text-transform:capitalize" placeholder="' . $field . '" value="' . ((!empty($row) && isset($row[$field])) ? $row[$field] : '') . '" name="' . $field . '" type="text">';
         }
         $inputs .= '<input style="text-transform:capitalize" value="Update" name="update' . $table . '" type="submit">';
-        echo $inputs;
+        return $inputs;
     }
 
     public function deleteQuery($table, $id)

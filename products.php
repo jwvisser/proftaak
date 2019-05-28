@@ -2,7 +2,11 @@
 include("components/header.php");
 
  $db = new smartcaps\db();
- $db->returnTable("customer","","");
+// $db->returnTable("customer","","");
+
+
+ $db->returnTable("ingredients","ID,name,calories","ID = 1");
+
 
 ?>
 

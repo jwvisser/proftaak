@@ -84,7 +84,7 @@
 				<img src="images/logoSmartCaps.png" alt="SmartCaps">
 			 </div>
 
-<?php
+    <?php
 		}
 	}
 
