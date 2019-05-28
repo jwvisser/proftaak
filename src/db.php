@@ -286,7 +286,11 @@ class db
             $executedQuery = $this->pdo->prepare("UPDATE `$table` SET $updatedFields WHERE `$table`.`ID` = :id");
             $executedQuery->bindParam(':id', $id, \PDO::PARAM_INT);
             $executedQuery->execute();
-            header('Location: ' . $this->page);
+            echo "
+                <script>
+                    javascript:window.history.back();
+                </script>
+            ";
         }
 
         $executedQuery = $this->pdo->prepare("SELECT * FROM `$table` WHERE `ID`=:id");
