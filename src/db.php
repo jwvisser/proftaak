@@ -128,7 +128,7 @@ class db
                 echo '<table cellpadding="0" cellspacing="0" class="db-table">';
                 // Create dynamic header for each column name. 
                 echo '<tr>';
-                unset($fieldArray['ID']);
+                unset($fieldArray[0]);
                 foreach ($fieldArray as $key => $value) {
                     echo "<th>" . $value . "</th>";
                 }
@@ -145,7 +145,7 @@ class db
 
                 // Create dynamic header for each column name.
                 echo '<tr>';
-                unset($fieldArray['ID']);
+                unset($fieldArray[0]);
                 foreach ($fieldArray as $key => $value) {
                     echo "<th>" . $value . "</th>";
                 }
