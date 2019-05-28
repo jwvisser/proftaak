@@ -128,6 +128,7 @@ class db
                 echo '<table cellpadding="0" cellspacing="0" class="db-table">';
                 // Create dynamic header for each column name. 
                 echo '<tr>';
+                unset($fieldArray['ID']);
                 foreach ($fieldArray as $key => $value) {
                     echo "<th>" . $value . "</th>";
                 }
@@ -144,6 +145,7 @@ class db
 
                 // Create dynamic header for each column name.
                 echo '<tr>';
+                unset($fieldArray['ID']);
                 foreach ($fieldArray as $key => $value) {
                     echo "<th>" . $value . "</th>";
                 }
@@ -157,7 +159,9 @@ class db
             foreach ($this->pdo->query($sql) as $row) {
 
                 echo '<tr>';
-                foreach ($row as $key => $value) {
+                $customArray = $row;
+                unset($customArray['ID']);
+                foreach ($customArray as $key => $value) {
                     echo '<td>', $value, '</td>';
                 }
                 if (@$_SESSION['login_Status'] == true) {

@@ -25,7 +25,7 @@ include("components/header.php");
 
 <?php
 if (isset($_GET['drink'])) {
-    $db->returnTable("ingredients","ID,name,calories,amount_of_water,protein,saturated_fats,unsaturated_fats,cholesterol,carbohydrates,sugar,vitamines","ID = {$_GET['drink']}");
+    $db->returnTable("ingredients","","ID = {$_GET['drink']}");
 }
 
 include("components/footer.php");
