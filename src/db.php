@@ -178,7 +178,6 @@ class db
             }
 
             echo '</table><br />';
-            array_shift($fieldArray);
             $fields = implode(',',$fieldArray);
 
            echo $this->returnInsertTable($table,$fields);
