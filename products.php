@@ -1,10 +1,8 @@
 <?php
 include("components/header.php");
-
  $db = new smartcaps\db();
 
  $drinks = $db->runQuery("SELECT * FROM ingredients");
-
 ?>
 
 <h1>Voedingswaarden producten</h1>
