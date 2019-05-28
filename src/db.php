@@ -18,9 +18,9 @@ class db
         $this->db = $db;
 
         $options = [
-            \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
-            \PDO::ATTR_EMULATE_PREPARES   => false,
+            \PDO::ATTR_EMULATE_PREPARES => false,
         ];
         $dsn = "mysql:host={$host};dbname={$db};charset={$charset}";
         try {
@@ -34,20 +34,38 @@ class db
     public function returnProducts()
     {
         $html = "";
+        $prices = "";
+        $productNames = "";
         if ($this->page == "Winkelwagen") {
-            $products = explode(',', $_COOKIE['cart']);
-            foreach ($products as $index => $value) {
-                $sql = "SELECT * FROM `product` WHERE `ID` = '$value'";
-                foreach ($this->pdo->query($sql) as $row) {
-                    $html .=
-                        "<div class='product'>
+            if (isset($_COOKIE['cart'])) {
+                $products = explode(',', rtrim($_COOKIE['cart'],','));
+                if (empty($products) || !$products[0] == "") {
+                    foreach ($products as $index => $value) {
+                        $sql = "SELECT * FROM `product` WHERE `ID` = '$value'";
+                        foreach ($this->pdo->query($sql) as $row) {
+                            $html .=
+                                "<div class='product'>
                           <h3 class='title' style='text-transform:capitalize;'>" . $row['name'] . "</h3>
                           <span class='price'>€" . $row['price'] . ",-</span>
-                          <button id='removeButton".$row['ID']."' class='removeButton' onclick='removeProduct(" . $row['ID'] . ");'>Verwijder</button>
+                          <button id='removeButton" . $row['ID'] . "' class='removeButton' onclick='removeProduct(" . $row['ID'] . ");'>Verwijder</button>
                         </div>";
+                            $productNames .= $row['name'] . ",";
+                            $prices .= $row['price'] . ",";
+                        }
+                    }
+                    echo $this->returnPriceTable($prices, $productNames);
+                    return $html;
+                }else{
+                    return "<style>.container-grid{display:initial !important;}</style>
+                        <h1>Geen producten in winkelwagen</h1>
+                        <a href='./shop'>Ga naar de winkel</a>";
                 }
+            } else {
+                return "<style>.container-grid{display:initial !important;}</style>
+                        <h1>Geen producten in winkelwagen</h1>
+                        <a href='./shop'>Ga naar de winkel</a>";
             }
-            return $html;
+
         } else {
             $sql = "SELECT * FROM `product`";
 
@@ -62,6 +80,18 @@ class db
 
             return $html;
         }
+    }
+
+    public function returnPriceTable($prices, $names)
+    {
+        $nameArray = explode(",", rtrim($names, ","));
+        $priceArray = explode(",", rtrim($prices, ","));
+        echo "<div id='pricetable'>";
+        foreach ($priceArray as $index => $price) {
+            echo "<p>" . $nameArray[$index] . " - €" . $priceArray[$index] . ",-</p>";
+        }
+        echo "<p>Total: €" . array_sum($priceArray) . ",-</p>";
+        echo "<input type='submit' value='Betaal nu'/></div>";
     }
 
     // Generate a HTML table from table name and (optional) fields
