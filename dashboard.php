@@ -73,7 +73,7 @@ $ingredients = new smartcaps\db();
         ?>
     </div>
     <div class="item">
-         <form action="uploadManagerCsv.php" method="post" enctype="multipart/form-data">
+        <form action="uploadManagerCsv.php" method="post" enctype="multipart/form-data">
             <h3>Upload CSV-bestand</h3>
             <label for="fileSelect">Bestandsnaam:</label>
             <input type="file" name="fileToUpload" accept=".csv">
@@ -93,6 +93,17 @@ $ingredients = new smartcaps\db();
             } else {
                 continue;
             }
+        }
+        // Open the file for reading
+        if (($h = fopen("uploads/export_950_facturen_14.csv", "r")) !== FALSE) {
+            // Convert each line into the local $data variable
+            while (($data = fgetcsv($h, 1000, ",")) !== FALSE) {
+                $newPrice = $data[0];
+                echo $newPrice;
+            }
+
+            // Close the file
+            fclose($h);
         }
         ?>
     </div>
