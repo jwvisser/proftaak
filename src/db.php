@@ -279,12 +279,10 @@ class db
             $lastElement = end($_POST);
 
             foreach ($_POST as $key => $v) {
-                if ($v !== $lastElement) {
-                    $updatedFields .= "`$key` = '$v',";
-                } else {
-                    $updatedFields .= "`$key` = '$v'";
-                }
+                $updatedFields .= "`$key` = '$v',";
             }
+
+            $updatedFields = rtrim($updatedFields,',');
 
             $executedQuery = $this->pdo->prepare("UPDATE `$table` SET $updatedFields WHERE `$table`.`ID` = :id");
             $executedQuery->bindParam(':id', $id, \PDO::PARAM_INT);
