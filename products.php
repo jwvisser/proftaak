@@ -1,7 +1,7 @@
 <?php
 include("components/header.php");
 
- $db = new smartcaps\db();
+$db = new smartcaps\db();
 ?>
 
 <h1>Voedingswaarden producten</h1>
