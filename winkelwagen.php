@@ -12,9 +12,35 @@ $db = new smartcaps\db();
     <style>
         .container-grid{
             display:grid;
-            grid-template-columns: auto auto auto auto;
+            grid-template-columns: auto auto auto;
             grid-column-gap: 5px;
             grid-row-gap:10px;
+        }
+
+        @media screen and (max-width: 1500px) {
+            .container-grid{
+                grid-template-columns: auto auto auto;
+            }
+        }
+
+        /* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 1200px) {
+            .container-grid{
+                grid-template-columns: auto auto;
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            .container-grid{
+                grid-template-columns: auto auto auto;
+            }
+        }
+
+        /* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+            .container-grid{
+                grid-template-columns: auto auto;
+            }
         }
 
         .container-grid .product{
@@ -58,6 +84,17 @@ $db = new smartcaps\db();
             right: 0;
             margin: auto;
         }
+
+        #pricetable{
+            position:absolute;
+            top:0;
+            right: -10%;
+            z-index:999;
+
+            border:1px solid black;
+            padding:15px;
+        }
+
     </style>
     <div class="container-grid">
         <?php echo $db->returnProducts(); ?>
@@ -80,6 +117,7 @@ $db = new smartcaps\db();
             $('#removeButton'+id).hide();
             $('#removeButton'+id).closest('div.product').hide();
             toastr.warning('Product verwijdert uit winkelwagen');
+            location.reload();
         }
     </script>
 
