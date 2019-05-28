@@ -270,12 +270,6 @@ class db
             unset($_POST['ID']);
             unset($_POST['update' . $table]);
 
-            foreach ($_POST as $key => $v) {
-                if ($_POST[$key] == "") {
-                    unset($_POST[$key]);
-                }
-            }
-
             $lastElement = end($_POST);
 
             foreach ($_POST as $key => $v) {
