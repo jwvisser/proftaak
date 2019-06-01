@@ -14,6 +14,39 @@ body {
     Navigation
 */
 
+#searchSection{
+    position:relative;
+    display:flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+#searchSection button{
+    position:absolute;
+    right:16px;
+
+    text-align:center;
+    height:29px;
+    width:30px;
+    background-color:#FFB200;
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+    border:none;
+    font-size:16px;
+}
+
+#searchSection #searchField{
+    font-family: 'Lato', sans-serif;
+    background-color: #FFF2F7;
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #611D6A;
+    border-radius: 6px;
+    margin: 0 15px;
+}
+
+
 .topnavbackground {
     background-color: #FFFFFF;
     width: 100%;
@@ -25,6 +58,9 @@ body {
     margin: auto;
     padding-top: 10px;
     padding-bottom: 10px;
+
+    display:flex;
+    flex-direction: row;
 }
 
 .secondTopNav{
