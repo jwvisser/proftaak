@@ -18,9 +18,9 @@ class db
         $this->db = $db;
 
         $options = [
-            \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
-            \PDO::ATTR_EMULATE_PREPARES   => false,
+            \PDO::ATTR_EMULATE_PREPARES => false,
         ];
         $dsn = "mysql:host={$host};dbname={$db};charset={$charset}";
         try {
@@ -112,10 +112,10 @@ class db
         if ($fields !== "") {
             $fieldArray = explode(',', $fields);
             $fields = "";
-            foreach($fieldArray as $field){
-                $fields .= "`".$field."`,";
+            foreach ($fieldArray as $field) {
+                $fields .= "`" . $field . "`,";
             }
-            $fields = rtrim($fields,',');
+            $fields = rtrim($fields, ',');
 
             $sql = 'SELECT ' . $fields . ' FROM `' . $table . '`' . @$filter;
         } else {
@@ -165,28 +165,29 @@ class db
                     echo '<td>', $value, '</td>';
                 }
                 if (@$_SESSION['login_Status'] == true) {
-                    if($this->page == "Products"){
-                        $drink = "&drink=".@$_GET['drink'];
-                    }else{
+                    if ($this->page == "Products") {
+                        $drink = "&drink=" . @$_GET['drink'];
+                    } else {
                         $drink = "";
                     }
 
-                    echo '<td> <a class="editButton" href="?table=' . $table . '&id=' . $row['ID'] . @$drink  . '#' . $table .'"><i class="material-icons">edit</i></a> </td>';
+                    echo '<td> <a class="editButton" href="?table=' . $table . '&id=' . $row['ID'] . @$drink . '#' . $table . '"><i class="material-icons">edit</i></a> </td>';
                     echo '<td> <a class="deleteButton" onclick="return confirm(\'Are you sure?\')" href="./delete?table=' . $table . '&id=' . $row['ID'] . '"><i class="material-icons">cancel</i></a></td>';
                 }
                 echo '</tr>';
             }
 
             echo '</table><br />';
-            $fields = implode(',',$fieldArray);
+            $fields = implode(',', $fieldArray);
 
-           echo $this->returnInsertTable($table,$fields);
+            echo $this->returnUpdateForm($table, $fields);
         } else {
             echo "No rows found...";
         }
     }
 
-    public function returnInsertTable($table,$fields){
+    public function returnUpdateForm($table, $fields)
+    {
         $html = '
             <form id="' . $table . '" class="updateForm" method="post">
                 <input name="ID" type="hidden" value="' . @$_GET['id'] . '">
@@ -276,7 +277,7 @@ class db
                 $updatedFields .= "`$key` = '$v',";
             }
 
-            $updatedFields = rtrim($updatedFields,',');
+            $updatedFields = rtrim($updatedFields, ',');
 
             $executedQuery = $this->pdo->prepare("UPDATE `$table` SET $updatedFields WHERE `$table`.`ID` = :id");
             $executedQuery->bindParam(':id', $id, \PDO::PARAM_INT);
@@ -293,14 +294,17 @@ class db
         $executedQuery->execute();
         $row = $executedQuery->fetch(\PDO::FETCH_ASSOC);
         $inputs .= "Selected: " . $id;
+        $table2 = '"' . $table . '"';
+        $inputs .= "<a onclick='hideForm(".$table2.")'> - Verbergen</a>";
         foreach ($fieldArray as $field) {
             $inputs .= '<input style="text-transform:capitalize" placeholder="' . $field . '" value="' . ((!empty($row) && isset($row[$field])) ? $row[$field] : '') . '" name="' . $field . '" type="text">';
         }
         $inputs .= '<input style="text-transform:capitalize" value="Update" name="update' . $table . '" type="submit">';
         return $inputs;
     }
-    
-    public function updatePrice($productName, $productPrice) {
+
+    public function updatePrice($productName, $productPrice)
+    {
         $updateQuery = $this->pdo->prepare("UPDATE product SET price =:productPrice WHERE name =:productName");
         $updateQuery->bindParam(':productPrice', $productPrice, \PDO::PARAM_INT);
         $updateQuery->bindParam(':productName', $productName, \PDO::PARAM_STR);
