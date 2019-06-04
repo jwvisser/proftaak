@@ -1,7 +1,6 @@
 <?php
 
 use smartcaps\db;
-
 use smartcaps\upload;
 
 include("components/header.php");
@@ -15,14 +14,15 @@ $ingredients = new smartcaps\db();
 
 $upload = new smartcaps\upload();
 
-if(isset($_POST['submitImage'])){
+if (isset($_POST['submitImage'])) {
     $upload->uploadImage();
-}else if(isset($_POST['submitCSV'])){
+} else if (isset($_POST['submitCSV'])) {
     $upload->uploadCSV();
 }
 
-
-
+if (isset($_POST['updatePrice'])) {
+    $products->updatePrice($_POST['productName'], $_POST['productPrice']);
+}
 ?>
 
 <style>
@@ -92,22 +92,33 @@ if(isset($_POST['submitImage'])){
                 'csv'
             );
 
+
+            if (($file = fopen("$csv", "r")) !== FALSE) {
+                // Convert each line into the local $data variable
+                while (($data = fgetcsv($file, 1000, ";")) !== FALSE) {
+                    $newPrice = $data;
+                }
+                // Close the file
+                fclose($file);
+            }
+            $productName = $newPrice[0];
+            $productPrice = $newPrice[1];
+
             $ext = strtolower(pathinfo($csv, PATHINFO_EXTENSION));
             if (in_array($ext, $supported_file)) {
-                echo '<a href="' . $csv . '">' . substr($csv, 8) . '</a><br>';
+                echo '<a href="' . $csv . '">' . substr($csv, 8) . '</a>';
+                ?>
+        <form method="post">
+            <label>Update prijs:</label>
+            <input type="hidden" value="<?php echo $productName; ?>" name="productName">
+            <input type="hidden" value="<?php echo $productPrice; ?>" name="productPrice">
+            <input type="submit" value="Update" name="updatePrice"><br>
+        </form>
+        <?php
+        
             } else {
                 continue;
             }
-        }
-        // Open the file for reading
-        if (($h = fopen("uploads/export_950_facturen_14(1).csv", "r")) !== FALSE) {
-            // Convert each line into the local $data variable
-            while (($data = fgetcsv($h, 1000, ",")) !== FALSE) {
-                $newPrice = $data[0];
-            }
-
-            // Close the file
-            fclose($h);
         }
         ?>
     </div>

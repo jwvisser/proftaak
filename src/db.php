@@ -299,6 +299,15 @@ class db
         $inputs .= '<input style="text-transform:capitalize" value="Update" name="update' . $table . '" type="submit">';
         return $inputs;
     }
+    
+    public function updatePrice($productName, $productPrice) {
+        $updateQuery = $this->pdo->prepare("UPDATE product SET price =:productPrice WHERE name =:productName");
+        $updateQuery->bindParam(':productPrice', $productPrice, \PDO::PARAM_INT);
+        $updateQuery->bindParam(':productName', $productName, \PDO::PARAM_STR);
+        $updateQuery->execute();
+        @header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
 
     public function deleteQuery($table, $id)
     {
