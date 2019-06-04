@@ -106,13 +106,14 @@ if (isset($_POST['updatePrice'])) {
 
             $ext = strtolower(pathinfo($csv, PATHINFO_EXTENSION));
             if (in_array($ext, $supported_file)) {
-                echo '<a href="' . $csv . '">' . substr($csv, 8) . '</a>';
+                
                 ?>
         <form method="post">
             <label>Update prijs:</label>
             <input type="hidden" value="<?php echo $productName; ?>" name="productName">
             <input type="hidden" value="<?php echo $productPrice; ?>" name="productPrice">
-            <input type="submit" value="Update" name="updatePrice"><br>
+            <?php echo '<a href="' . $csv . '">' . substr($csv, 8) . '</a>'; ?>
+            <input type="submit" value="Update" name="updatePrice"><br><br>
         </form>
         <?php
         
