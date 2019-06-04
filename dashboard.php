@@ -38,6 +38,20 @@ if (isset($_POST['updatePrice'])) {
     .content {
         width: 85% !important;
     }
+
+    input[type=text], input[type=password], textarea {
+        font-family: 'Lato', sans-serif;
+        background-color: #FFF2F7;
+        width: 40%;
+        display: flex;
+        padding: 14px;
+        border: 2px solid #611D6A;
+        border-radius: 6px;
+        margin-bottom: 30px;
+        margin-top: 5px;
+        resize: vertical;
+        box-sizing: border-box;
+    }
 </style>
 
 <div class="container">
@@ -124,5 +138,12 @@ if (isset($_POST['updatePrice'])) {
         ?>
     </div>
 </div>
+
+<script>
+    function hideForm(table){
+        $('#'+table).hide();
+        window.location.replace(window.location.pathname)
+    }
+</script>
 
 <?php include("components/footer.php"); ?>
