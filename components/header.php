@@ -39,7 +39,7 @@ session_start();
             <a href="./products">Voedingswaarden</a>
             <a href="./about-us">Over Ons</a>
             <a href="./contact">Contact</a>
-            <form id="searchSection">
+            <form method="post" action="search" id="searchSection">
                 <input id="searchField" type="text" placeholder="Zoeken" name="search">
                 <button type="submit" name="Search">
                     <i class="fas fa-search"></i>
