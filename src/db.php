@@ -299,7 +299,7 @@ class db
         foreach ($fieldArray as $field) {
             $inputs .= '<input style="text-transform:capitalize" placeholder="' . $field . '" value="' . ((!empty($row) && isset($row[$field])) ? $row[$field] : '') . '" name="' . $field . '" type="text">';
         }
-        $inputs .= '<input style="text-transform:capitalize" value="Update" name="update' . $table . '" type="submit">';
+        $inputs .= '<input value="update" name="update' . $table . '" type="submit">';
         return $inputs;
     }
 
