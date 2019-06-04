@@ -1,10 +1,10 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
+use smartcaps\translate;
 require_once('./vendor/autoload.php');
 
-$languageswitch = new smartcaps\translate();
+$language = new smartcaps\translate();
 
 session_start();
 
@@ -32,20 +32,7 @@ session_start();
 <body>
 <div class="footerpusher">
     <div class="topnavbackground">
-        <div class="topnavbar">
-            <span><a href="./">SMARTCAPS</a></span>
-            <a href="./">Home</a>
-            <a href="./shop">Shop</a>
-            <a href="./products">Voedingswaarden</a>
-            <a href="./about-us">Over Ons</a>
-            <a href="./contact">Contact</a>
-            <form method="post" action="search" id="searchSection">
-                <input id="searchField" type="text" placeholder="Zoeken" name="search">
-                <button type="submit" name="Search">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
-        </div>
+        <?php $language->getHTML("index", "menuBar") ?>
         <div class="secondTopNav">
             <?php
             if (@$_SESSION['login_Status'] == true) echo '<a href="./logout">logout</a>' . ' | ' . '<a href="./dashboard">Dashboard</a>';
