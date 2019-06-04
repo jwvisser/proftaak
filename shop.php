@@ -64,7 +64,7 @@ $db = new smartcaps\db();
         border:1px solid #611D6A;
     }
 </style>
-<a href="./winkelwagen">Naar winkelwagen ></a><br><br>
+<?php $language->getHTML("shop", "toShoppingcart") ?>
 <div class="container-grid">
     <?php echo $db->returnProducts(); ?>
 </div>
