@@ -22,11 +22,13 @@ $db = new smartcaps\db();
 				echo "We hebben uw zoekterm op de volgende pagina's kunnen vinden:<br />";
 
 				foreach ($results as $result) {
+					$page = $result['page'];
+
 					if ($result['page'] == "index") {
-						$result['page'] = "home";
+						$page = "home";
 					}
 
-					echo "<br /><a href='{$result['page']}'>{$result['page']}</a>";
+					echo "<br /><a href='{$result['page']}'>{$page}</a>";
 				}
 			}
 		}
