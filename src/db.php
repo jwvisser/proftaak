@@ -92,7 +92,7 @@ class db
             echo "<p>" . $nameArray[$index] . " - €" . $priceArray[$index] . ",-</p>";
         }
         echo "<p>Total: €" . array_sum($priceArray) . ",-</p>";
-        echo "<input type='submit' value='Betaal nu'/></div>";
+        echo '<input type="submit" value="Betaal nu" onclick="window.location.href=\'bank.html\'"/></div>';
     }
 
     // Generate a HTML table from table name and (optional) fields
