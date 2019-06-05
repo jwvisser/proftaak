@@ -11,6 +11,8 @@ $auth->checkAuth();
 $products = new smartcaps\db();
 $users = new smartcaps\db();
 $ingredients = new smartcaps\db();
+$searchFound = new smartcaps\db();
+$searchNotFound = new smartcaps\db();
 
 $upload = new smartcaps\upload();
 
@@ -137,6 +139,14 @@ if (isset($_POST['updatePrice'])) {
         }
         ?>
     </div>
+</div>
+<div class="container">
+	<div class="item">
+		<?php $searchFound->returnTable("search", "", "found = '1'"); ?>
+	</div>
+	<div class="item">
+		<?php $searchNotFound->returnTable("search", "", "found = '0'"); ?>
+	</div>
 </div>
 
 <script>
