@@ -4,6 +4,7 @@ include("components/header.php");
 $db = new smartcaps\db();
 
 	if (isset($_POST['Search'])) {
+
 		if (preg_match("/^[  a-zA-Z]+/", $_POST['search'])) {
 			$search = $_POST['search'];
 
@@ -15,10 +16,13 @@ $db = new smartcaps\db();
 			$count = $db->getRowCount($sql);
 
 			if ($count == 0) {
+				$db->updateSearch($search, 0);
 				echo "We hebben helaas niets kunnen vinden.";
 			}
 			
 			else {
+				$db->updateSearch($search, 1);
+
 				echo "We hebben uw zoekterm op de volgende pagina's kunnen vinden:<br />";
 
 				foreach ($results as $result) {

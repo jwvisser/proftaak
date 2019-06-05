@@ -254,7 +254,7 @@ class db
 
     public function insertQuery($table, $fields, $values)
     {
-        $executedQuery = $this->pdo->prepare("");
+        $executedQuery = $this->pdo->prepare("INSERT INTO `{$table}` ({$fields}) VALUES ({$values})");
         $executedQuery->execute();
     }
 
@@ -325,6 +325,21 @@ class db
             </script>
         ";
     }
+
+	public function updateSearch($term, $found)
+	{
+		$sql = "SELECT * FROM search WHERE term = '{$term}'";
+		$searchCount = self::getRowCount($sql);
+		$searchData = self::runQuery($sql)->fetchAll();
+
+		if ($searchCount == 0) {
+			self::runQuery("INSERT INTO `search` (term, found) VALUES ('{$term}', '{$found}')");
+		}
+		else {
+			$newCount = $searchData[0]['times'] + 1;
+			self::runQuery("UPDATE `search` SET `times` = '{$newCount}' WHERE term = '{$term}'");
+		}
+	}
 
     private function DBClose()
     {
