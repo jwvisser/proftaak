@@ -2,10 +2,13 @@
     "name": "robbert/smartcaps",
     "description": "Smartcaps proftaak",
     "type": "project",
-    "require": {},
+    "require": {
+        "phpunit/phpunit": "^5.7"
+    },
     "autoload": {
         "psr-4": {
-            "smartcaps\\": "src/"
+            "smartcaps\\": "src/",
+            "App\\": "app"
         }
     }
 }
