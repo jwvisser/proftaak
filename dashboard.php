@@ -58,16 +58,19 @@ if (isset($_POST['updatePrice'])) {
 
 <div class="container">
     <div class="item">
+		<h1>Shop items </h1>
         <?php $products->returnTable("product", "", ""); ?>
     </div>
     <div class="item">
+		<h1>Admin accounts</h1>
         <?php $users->returnTable("user", "", ""); ?>
     </div>
 </div>
+<br /><br />
 <div class="container">
     <div class="item">
         <form method="post" enctype="multipart/form-data">
-            <h3>Upload afbeeldingen</h3>
+            <h1>Upload afbeeldingen</h1>
             <label for="fileSelect">Bestandsnaam:</label>
             <input type="file" name="photo" id="fileSelect">
             <input type="submit" name="submitImage" value="Upload">
@@ -95,7 +98,7 @@ if (isset($_POST['updatePrice'])) {
     </div>
     <div class="item">
         <form method="post" enctype="multipart/form-data">
-            <h3>Upload CSV-bestand</h3>
+            <h1>Upload CSV-bestand</h1>
             <label for="fileSelect">Bestandsnaam:</label>
             <input type="file" name="fileToUpload" accept=".csv">
             <input type="submit" value="Upload" name="submitCSV">
@@ -140,11 +143,14 @@ if (isset($_POST['updatePrice'])) {
         ?>
     </div>
 </div>
+<br /><br /><br />
 <div class="container">
 	<div class="item">
+		<h1>Gevonden zoektermen</h1>
 		<?php $searchFound->returnTable("search", "", "found = '1'"); ?>
 	</div>
 	<div class="item">
+		<h1>Niet gevonden zoektermen</h1>
 		<?php $searchNotFound->returnTable("search", "", "found = '0'"); ?>
 	</div>
 </div>
