@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p>Bedankt voor je bericht, <?php echo $voornaam; ?>!</p>
             <p>Uw bericht is doorgestuurd naar SmartCaps. Bovendien heeft u de inhoud van uw bericht ook in uw eigen mailbox ontvangen. Wij gaan ermee aan de slag en komen zo snel mogelijk met een reactie. Je kunt dus even achteroverleunen.</p>
             <p>Met vriendelijke groet,</p>
-            <img src="images/logoSmartCaps.png" alt="SmartCaps">
+            <img src="assets/logoSmartCaps.png" alt="SmartCaps">
         </div>
 
         <?php
