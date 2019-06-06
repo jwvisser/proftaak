@@ -143,6 +143,6 @@ if ($_SERVER["REQUEST_METHOD"] != "POST" || !empty($naamError) || !empty($achter
     }
 </script>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd_L8FRhEmwBoTf9H9jXNOmaaR2H4M--c&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP-MCH52Ri4gXUqlc-m1Ocbd61w3gndu4&callback=initMap"></script>
 
 <?php include("components/footer.php"); ?>
