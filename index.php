@@ -9,7 +9,7 @@ $language = new smartcaps\translate();
 <div class="row">
 <?php $language->getHTML("index", "smartcap") ?>
 </div>
-<hr>
+<br /><br />
 <div class="row">		
     <div class="column">
 <?php $language->getHTML("index", "quality") ?>
