@@ -66,6 +66,9 @@ if (isset($_POST['updatePrice'])) {
         <?php $users->returnTable("user", "", ""); ?>
     </div>
 </div>
+<nav>
+	<a href = "product-new.php" title = "add a record">New record</a>
+</nav>
 <br /><br />
 <div class="container">
     <div class="item">
